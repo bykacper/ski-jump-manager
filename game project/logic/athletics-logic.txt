@@ -1,0 +1,17 @@
+1. Skills
+	Skills is a feature which describe level of athlete. Skills have some values such as:
+		- approach position 
+		- breakout  
+		- flight
+		- landings
+	Skills can be gained in training, and can be lost as age incrases.
+
+2. Injuries (will be introduced in later stages of development)
+
+3. Morale (will be introduced in later stages of development)
+	Morale is a feature which descript a level of athlete satisfaction. It is expressed as a percentage (0 - 100), where 0 - 33 means that the player is dissatisfied, 34 - 66 player is neutral, 67 - 100 player is satisfied. Morale can 	be gained in: 
+		- good training
+		- high place in the competiton.
+	Morale can also be lost for exaple in:
+		- bad training
+		- low place in the competition
