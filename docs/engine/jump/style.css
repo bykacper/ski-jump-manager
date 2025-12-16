@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 105%;
+    font-family: monospace;
+}
+
+.data {
+    margin: 20px 5px;
+}
+
+.data input {
+    padding-inline: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: limegreen;
+}
+
+th, td {
+    padding: 2px 5px;
+    text-align: left;
+    border: solid green 1px
+}
+
+.rk, .bib {
+    width: 50px;
+}
+
+.name {
+    width: 250px;
+    text-align: left;
+    padding-inline: 20px;
+}
+
+.nsa, .speed, .wind, .gate, .gate-comp, .j-pts, .rd-pts {
+    width: 120px;
+}
+
+.dist {
+    width: 150px;
+}
+
+tbody td {
+    text-align: center;
+}
