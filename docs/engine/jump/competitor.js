@@ -1,12 +1,12 @@
 export const goodCompetitor = {
   attributes: {
-    inrunTechnique: 20,
-    takeoff: 50,
-    flight: 70
+    inrunTechnique: 95,
+    takeoff: 95,
+    flight: 95
   },
   state: {
-    form: 6,
-    fatigue: 0,
-    confidence: 50
+    form: 9,
+    fatigue: 25,
+    confidence: 90
   }
 };

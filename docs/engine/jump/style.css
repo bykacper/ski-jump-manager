@@ -5,8 +5,8 @@
     font-family: monospace;
 }
 
-.data {
-    margin: 20px 5px;
+#simulate {
+    margin: 10px;
 }
 
 .data input {

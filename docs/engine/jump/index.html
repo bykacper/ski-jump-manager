@@ -9,50 +9,28 @@
 </head>
 
 <body>
-    <div class="data">
-        <input type="text" placeholder="name">
-        <input type="number" placeholder="Bib">
-        <input type="text" placeholder="nsa">
-        <input type="text" placeholder="gate-base">
-        <input type="text" placeholder="gate">
-        <br> <br> 
-        <input type="number" placeholder="inrun">
-        <input type="number" placeholder="form">
-        <input type="number" placeholder="confidence">
-        <input type="number" placeholder="fatigue">
-        
-        <button> Skok </button>
-    </div>
-
     <table>
+        <button id="simulate">Symuluj konkurs</button>
+
         <thead>
             <th class="rk"> Rk </th>
             <th class="bib"> Bib </th>
             <th class="name"> Name </th>
             <th class="nsa"> NSA </th>
             <th class="speed"> Speed </th>
-            <th class="wind"> Wind Comp </th>
+            <th class="wind"> Wind </th>
             <th class="gate"> Gate </th>
             <th class="gate-comp"> Gate Comp </th>
             <th class="j-pts"> J. Pts </th>
             <th class="dist"> Dist </th>
             <th class="rd-pts"> Rd. Pts </th>
         </thead>
-        <tbody>
-            <td> 1 </td>
-            <td> 64 </td>
-            <td> PREVC Domen </td>
-            <td> SLO </td>
-            <td> 88.6 km/h </td>
-            <td> -9.9 </td>
-            <td> 10 </td>
-            <td> 0.0 </td>
-            <td> 56.0 </td>
-            <td> 140.5 m </td>
-            <td> 134.0 </td>
+        <tbody id="results">
+
         </tbody>
     </table>
 
-    <script type="module" src="test.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
+
 </html>

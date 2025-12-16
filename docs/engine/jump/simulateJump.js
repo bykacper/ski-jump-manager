@@ -1,26 +1,24 @@
+import generateLocalWind from "./generateLocalWind.js";
 import calculateInrunEfficiency from "./calculateInrunEfficiency.js";
 import calculateBaseInrunSpeed from "./calculateBaseInrunSpeed.js";
 import randomInrunNoise from "./randomInrunNoise.js";
 import calculateTakeoffQuality from "./calculateTakeoffQuality.js";
 import calculateFlightDistance from "./calculateFlightDistance.js";
-import { INRUN_EFFICIENCY_TO_SPEED } from "./balance.js";
 
-export default function simulateJump(competitor, hill) {
-  // 1️⃣ Efektywność najazdu
+export default function simulateJump(competitor, hill, windTrend) {
+  const localWind = generateLocalWind(windTrend);
+
   const inrunEfficiency =
     calculateInrunEfficiency(competitor);
 
-  // 2️⃣ Bazowa prędkość
   const baseSpeed =
     calculateBaseInrunSpeed(hill);
 
-  // 3️⃣ Finalna prędkość najazdowa
   const inrunSpeed =
     baseSpeed +
-    (inrunEfficiency - 50) * INRUN_EFFICIENCY_TO_SPEED +
+    (inrunEfficiency - 50) * 0.02 +
     randomInrunNoise();
 
-  // 4️⃣ Wybicie
   const takeoffQuality =
     calculateTakeoffQuality({
       attributes: competitor.attributes,
@@ -28,18 +26,19 @@ export default function simulateJump(competitor, hill) {
       inrunSpeed
     });
 
-  // 5️⃣ Lot
   const distance =
     calculateFlightDistance({
       attributes: competitor.attributes,
       state: competitor.state,
       takeoffQuality,
-      context: hill
+      context: hill,
+      localWind
     });
 
   return {
-    inrunSpeed: Number(inrunSpeed.toFixed(1)),
+    distance,
+    inrunSpeed: Number(inrunSpeed.toFixed(2)),
     takeoffQuality: Number(takeoffQuality.toFixed(1)),
-    distance
+    wind: localWind
   };
 }

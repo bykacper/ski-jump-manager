@@ -1,77 +1,72 @@
-import calculateHillBaseDistance from "./calculateHillBaseDistance.js";
+import calculateWindEffect from "./calculateWindEffect.js";
 
 function clamp(value, min, max) {
-    return Math.max(min, Math.min(max, value));
+  return Math.max(min, Math.min(max, value));
 }
 
-function randomFlightNoise() {
-    return Math.random() * 3 - 1.5; // -1.5 .. +1.5 m
+// losowość zależna od klasy zawodnika
+function randomFlightNoise(flight) {
+  const base = 0.8;                    // minimum dla słabych
+  const extra = (flight / 100) * 1.7;  // więcej dla topów
+  const range = base + extra;          // max ~2.5 m
+
+  return Math.random() * range * 2 - range;
 }
 
 export default function calculateFlightDistance({
-    attributes,
-    state,
-    takeoffQuality,
-    context
+  attributes,
+  state,
+  takeoffQuality,
+  context,
+  localWind
 }) {
-    const { flight } = attributes;          // 0..100
-    const { form, confidence } = state;     // form: -10..10
-    const { kPoint, hillSize } = context;
+  const { flight } = attributes;
+  const { form, confidence } = state;
+  const { kPoint, hillSize } = context;
 
-    /**
-     * 1️⃣ Potencjał z wybicia (mały!)
-     * To NIE jest główne źródło metrów
-     */
-    const takeoffPotential = (takeoffQuality - 50) * 0.2;
+  // 1️⃣ baza fizyczna skoczni (NIE K-point)
+  const hillBase =
+    kPoint + (hillSize - kPoint) * 0.35;
 
-    /**
-     * 2️⃣ Nośność lotu (KLUCZ)
-     * flight = 0   → ~0.15
-     * flight = 50  → ~0.55
-     * flight = 100 → 1.0
-     */
-    const flightLift =
-        Math.pow(flight / 100, 1.2);
+  // 2️⃣ potencjał z wybicia (mały, kontrolowany)
+  const takeoffPotential =
+    (takeoffQuality - 50) * 0.2;
 
-    /**
-     * 3️⃣ Efektywna część lotna
-     */
-    const flightContribution =
-        takeoffPotential * flightLift;
+  // 3️⃣ nośność lotu (flight = klucz)
+  const flightLift =
+    Math.pow(flight / 100, 1.2);
 
-    /**
-     * 4️⃣ TWARDY LIMIT DLA SŁABEGO LOTU
-     * Brak umiejętności = szybkie opadanie
-     */
-    const flightPenalty =
-        (1 - flightLift) * 18; // do -18 m
+  const flightContribution =
+    takeoffPotential * flightLift;
 
-    /**
-     * 5️⃣ Stan zawodnika (mały wpływ)
-     */
-    const stateModifier =
-        form * 0.4 +
-        (confidence - 50) * 0.04;
+  // 4️⃣ kara za brak lotu
+  const flightPenalty =
+    (1 - flightLift) * 18;
 
-    const hillBase =
-        calculateHillBaseDistance(context);
+  // 5️⃣ stan zawodnika
+  const stateModifier =
+    form * 0.4 +
+    (confidence - 50) * 0.04;
 
-    let distance =
-        hillBase +
-        flightContribution -
-        flightPenalty +
-        stateModifier +
-        randomFlightNoise();
+  // 6️⃣ wiatr (metry, bez punktów)
+  const windEffect =
+    calculateWindEffect(localWind);
 
+  // 7️⃣ finalny dystans
+  let distance =
+    hillBase +
+    flightContribution -
+    flightPenalty +
+    stateModifier +
+    windEffect +
+    randomFlightNoise(flight);
 
-    /**
-     * 6️⃣ Ograniczenia HS 140
-     */
-    distance = clamp(
-        distance,
-        kPoint - 25, // ~100 m
-        hillSize + 5 // ~145 m
-    );
+  // 8️⃣ ograniczenia realistyczne
+  distance = clamp(
+    distance,
+    kPoint - 25,  // ~100 m
+    hillSize + 5  // ~145 m
+  );
 
-    return Number(distance.toFixed(1));
+  return Number(distance.toFixed(1));
 }
