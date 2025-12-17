@@ -11,7 +11,7 @@ export default function generateLocalWind(windTrend) {
   let strength;
 
   if (flipped) {
-    strength = Math.random() * 0.5; // 0.0 – 0.5 m/s
+    strength = Math.random() * 1; // 0.0 – 0.5 m/s
   } else {
     const deviation = Math.random() * 1.2 - 0.6;
     strength = windTrend.strength + deviation;
@@ -19,6 +19,6 @@ export default function generateLocalWind(windTrend) {
 
   return {
     direction,
-    strength: Number(Math.max(0, strength).toFixed(1))
+    strength: Number(Math.max(0, strength).toFixed(2))
   };
 }

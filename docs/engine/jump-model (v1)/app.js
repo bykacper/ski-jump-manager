@@ -3,11 +3,12 @@ import simulateJump from "./simulateJump.js";
 import generateWindTrend from "./generateWindTrend.js";
 
 const hill = {
-  baseInrunSpeed: 87,
-  baseGate: 8,
-  gate: 8,
-  kPoint: 116,
-  hillSize: 130
+  baseInrunSpeed: 91,
+  baseGate: 10,
+  gate: 9,
+  kPoint: 125,
+  hillSize: 140,
+  gatePointValue: 3.0
 };
 
 const button = document.getElementById("simulate");
@@ -35,12 +36,12 @@ button.addEventListener("click", () => {
         <td> </td>
         <td>${r.name}</td>
         <td>${r.nation}</td>
-        <td>${r.inrunSpeed} km/h</td>
-        <td>${r.wind.direction} ${r.wind.strength} m/s</td>
+        <td>${r.inrunSpeed.toFixed(1)} km/h</td>
+        <td>${r.wind.direction == "head" ? "+" : "-"}${r.wind.strength} m/s</td>
         <td>${r.points.windComp}</td>
-        <td> 10 </td>
+        <td>${hill.gate} </td>
         <td></td>
-        <td>${r.points.styleTotal.toFixed(1)}</td>
+        <td>${r.points.style.toFixed(1)}</td> 
         <td>${r.distance} m</td>
         <td>${r.points.total}</td>
       `;

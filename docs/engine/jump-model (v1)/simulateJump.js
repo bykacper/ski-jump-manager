@@ -48,7 +48,12 @@ export default function simulateJump(competitor, hill, windTrend) {
       distance,
       kPoint: hill.kPoint,
       localWind,
-      attributes: competitor.attributes
+      attributes: competitor.attributes,
+      gateContext: {
+        gate: hill.gate,
+        baseGate: hill.baseGate,
+        gatePointValue: hill.gatePointValue
+      }
     });
 
   return {
