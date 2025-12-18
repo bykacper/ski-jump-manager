@@ -1,4 +1,4 @@
 export const competitionsSettings = {
     wind: "tail",
-    gate: 20
+    gate: 10
 }
