@@ -1,4 +1,7 @@
 export const competitionsSettings = {
-    wind: "tail",
-    gate: 10
-}
+  gate: 16,
+  wind: {
+    direction: "tail", // "head" | "tail"
+    strength: 0.8     
+  }
+};

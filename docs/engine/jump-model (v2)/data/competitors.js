@@ -59,7 +59,7 @@ export const competitors = [
         id: 7,
         name: "Kamil",
         surname: "Stoch",
-        abilityToGenerateSpeed: 30,
+        abilityToGenerateSpeed: 50,
         takeofSkill: 60,
         flightSkill: 65
     },
@@ -75,9 +75,9 @@ export const competitors = [
         id: 9,
         name: "baddest",
         surname: "baddest",
-        abilityToGenerateSpeed: -95,
-        takeofSkill: -95,
-        flightSkill: -95
+        abilityToGenerateSpeed: 0,
+        takeofSkill: 0,
+        flightSkill: 0
     },
     {
         id: 10,
@@ -87,6 +87,4 @@ export const competitors = [
         takeofSkill: 100,
         flightSkill: 100
     }
-
-    
 ]

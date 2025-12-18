@@ -1,3 +1,9 @@
+function flyingHill(hsPoint) {
+  if (hsPoint >= 180 ) return 1.04;
+  return 1;
+}
+
+
 export function calculateDistance(effectiveSpeed, competition) {
   const { hsPoint, baseSpeed } = competition;
 
@@ -6,7 +12,7 @@ export function calculateDistance(effectiveSpeed, competition) {
   // lekka nieliniowość – im dalej, tym trudniej
   const adjustedRatio = Math.pow(speedRatio, 1.1);
 
-  const distance = hsPoint * adjustedRatio;
+  const distance = hsPoint * adjustedRatio * flyingHill(competition.hsPoint);
 
   // zabezpieczenie – nie latamy w kosmos
   const maxDistance = hsPoint * 1.08;

@@ -13,8 +13,8 @@ export function simulateTakeoff(inrunSpeed, takeoffSkill) {
   let multiplier = baseMultiplier + randomness;
 
   // SOFT CAP
-  const MAX_PEAK = 1.04;
-  const MIN_VALUE = 0.82;
+  const MAX_PEAK = 1.08;
+  const MIN_VALUE = 0.72;
 
   multiplier = Math.max(MIN_VALUE, multiplier);
   multiplier = Math.min(MAX_PEAK, multiplier);
