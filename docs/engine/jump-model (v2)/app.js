@@ -7,6 +7,8 @@ import { competitionsSettings } from "./competitionsSettings.js";
 import { applyWindToDistance } from "./utils/applyWind.js";
 import { calculateFlightStability } from "./utils/calculateFlightStability.js";
 import { calculateStyleNotes } from "./utils/calculateStyleNotes.js";
+import { calculateDistancePoints } from "./utils/calculateDistancePoints.js";
+import { roundToHalfJumpDistance } from './helpers/roundToHalfJumpDistance.js'
 
 competitors.forEach(competitor => {
     const approachSpeed = generateSpeed(competitor.abilityToGenerateSpeed, competitions[0].baseSpeed);
@@ -20,6 +22,8 @@ competitors.forEach(competitor => {
         competitions[0].hsPoint
     );
 
+    const roundedDistance = roundToHalfJumpDistance(distance);
+
     const flightStability = calculateFlightStability(
         competitor.flightSkill,
         competitionsSettings.wind
@@ -29,13 +33,13 @@ competitors.forEach(competitor => {
     const sortedNotes = [...styleNotes].sort((a, b) => a - b);
     const stylePoints = sortedNotes[1] + sortedNotes[2] + sortedNotes[3];
 
+    const distancePoints = calculateDistancePoints(roundedDistance, competitions[0]);
+    const totalPoints = Number(distancePoints) + Number(stylePoints);
 
     console.log(competitor.name,
         competitor.surname, ", ",
-        approachSpeed.toFixed(1), " - ",
-        takeoff.effectiveSpeed.toFixed(1), ", ",
-        takeoff.takeoffMultiplier.toFixed(2), ", ",
-        distance.toFixed(0), " m, ", 
-        flightStability.toFixed(2), "|",
-        stylePoints, " pts.");
+        approachSpeed.toFixed(1), " km/h - ",
+        roundedDistance, "m |", 
+        stylePoints, "j. pts. |",
+        totalPoints, "p.");
 });

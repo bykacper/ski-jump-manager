@@ -6,6 +6,7 @@ export const competitions = [
         hsPoint: 142,
         baseGate: 16,
         baseSpeed: 88.0,
-        speedDiff: 0.4
+        speedDiff: 0.4,
+        distanceBasePoint: 90
     }
 ]
