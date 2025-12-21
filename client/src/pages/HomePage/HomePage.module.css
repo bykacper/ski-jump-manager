@@ -1,0 +1,19 @@
+.homePage {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-inline: 10vw;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(0, 0, 0, 0.55) 70%
+    ),
+    linear-gradient(
+      135deg,
+      #1e1e1e 0%,
+      #3a3a3a 40%,
+      #3f3f3f 60%,
+      #1c1c1c 100%
+    );
+}
